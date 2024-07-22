@@ -3,6 +3,7 @@ import { Usuario } from 'src/app/models/usuario';
 import { AuthService } from '../../service/auth.service';
 import { FirestoreService } from 'src/app/modules/shared/service/firestore.service';
 import { Router } from '@angular/router';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-iniciosesion',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class IniciosesionComponent {
   hide = true;
+  usuarios: any;
   constructor(
     public servicioAuth: AuthService,
     public servicioFireStore: FirestoreService,
@@ -32,7 +34,28 @@ export class IniciosesionComponent {
       email: this.sesiones.email,
       password: this.sesiones.password
     }
-    const res = await this.servicioAuth.IniciarSesion(credenciales.email, credenciales.password)
+    try{
+      // obtenemos usuario de la BD
+      const usuarioBD = await this.servicioAuth.obtenerUsuario(credenciales.email)
+
+      if(!usuarioBD || usuarioBD.empty){
+        alert("correo electronico no registrado");
+        this.LimpiarInputs();
+        return;
+      }
+      const usuarioDoc = usuarioBD.docs[0];
+      
+      const usuarioData = usuarioDoc.data() as Usuario;
+
+      const hashedPassword = CryptoJS.SHA256(credenciales.password).toString();
+
+      if(hashedPassword !== usuarioData.password){
+        alert ("contraseña incorrecta");
+        this.usuarios.password = '';
+        return;
+      }
+
+      const res = await this.servicioAuth.IniciarSesion(credenciales.email, credenciales.password)
       .then(res => {
         alert('se pudo iniciar sesion')
         this.servicioRutas.navigate(['/Inicio'])
@@ -41,6 +64,9 @@ export class IniciosesionComponent {
         alert('no se pudo iniciar sesion' + err)
         this.LimpiarInputs();
       })
+    }catch(error){
+      this.LimpiarInputs();
+    }
   }
   LimpiarInputs() {
     const inputs = {

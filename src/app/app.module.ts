@@ -27,10 +27,6 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage'; // trab
     BrowserAnimationsModule,
     // COMPONENTES GLOBALES
     SharedModule,
-    // VINCULACION CON FIREBASE
-    AngularFireModule.initializeApp(environment.firebaseConfig), // inicializar firebase dentro del proyecto
-    AngularFireAuthModule,
-    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

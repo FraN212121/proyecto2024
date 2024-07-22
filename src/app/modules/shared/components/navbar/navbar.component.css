@@ -1,4 +1,29 @@
 .example-spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+@media(min-width: 300px) and (max-width: 700px) {
+  mat-toolbar {
+    background-color: aquamarine;
   }
-  
+  #menuInicio {
+  display: none;
+}
+
+#menuProductos {
+  display: none;
+}
+}
+
+
+
+/* ENCAPSULA ESTILOS PRA PANTALLAS MAS GRANDES -- EJ: computadora, televisor*/
+@media (min-width:700px) {
+  mat-toolbar {
+    background-color: cornsilk;
+  }
+
+  #menuSecciones{
+    display: none;
+  }
+}

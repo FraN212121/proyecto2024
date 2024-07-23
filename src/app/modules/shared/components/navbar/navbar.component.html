@@ -24,9 +24,11 @@
 
       <!-- Inicio de sesion y el registro del nuevo usuario -->
     <button mat-button [matMenuTriggerFor]="usuario"><mat-icon>account_circle</mat-icon></button>
+        <!-- Menu desplegable para manejar todo el acceso de lo susuarios en la pagina -->
     <mat-menu #usuario="matMenu">
-        <button mat-menu-item routerLink="/registro">Registrarse</button>
-        <button mat-menu-item routerLink="/inicio-sesion">Iniciar sesion</button>
+        <button mat-menu-item (click)="Iniciar()" *ngIf="logueado" routerLink="/registro">Registrarse</button>
+        <button mat-menu-item (click)="Iniciar()" *ngIf="logueado" routerLink="/inicio-sesion">Iniciar sesion</button>
+        <button mat-menu-item (click)="Cerrarsesion()" *ngIf="deslogueado" >Cerrar Sesion</button>
     </mat-menu>
 
       <!-- Carrito -->

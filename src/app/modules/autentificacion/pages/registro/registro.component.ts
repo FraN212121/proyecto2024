@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { FirestoreService } from 'src/app/modules/shared/service/firestore.service';
 // importamos paqueteria de criptacion
 import * as CryptoJS from 'crypto-js';
+//paqueteria de alertas personalizadas
+  import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro',
@@ -45,13 +47,21 @@ export class RegistroComponent {
     const res = await this.servicioAuth.registrar(credenciales.email, credenciales.password)
       // el metodo THEN es una promesa que devuelve el mismo valor si todo sale bien
       .then(res => {
-        alert("se pudo registrar con exito")
-        // el metodo NAVIGATE nos redirecciona a otra vista 
+        Swal.fire({
+          title: "Buen trabajo!",
+          text: "Se pudo registrar con exito :)",
+          icon: "success"
+        });
+        // el metodo NAVIGATE nos redirecciona a otra vista
         this.serviciosRutas.navigate(['/inicio'])
       })
       // el metodo CATCH captura una falla y la vuelve un error cuando la prmomesa salga mal
       .catch(error => {
-        alert("Hubo un error al registrar un nuevo usuario \n" + error)
+        Swal.fire({
+          title: "Ocurrio un error!",
+          text: "No se pudo registrar con exito :)"+error,
+          icon: "error"
+        });
       })
     const uid = await this.servicioAuth.obtenerUid();
     this.usuarios.uid = uid
@@ -63,7 +73,6 @@ export class RegistroComponent {
     this.usuarios.password=CryptoJS.SHA256(this.usuarios.password).toString();
 
 
-    alert("se ha registrado con exito")
     this.limpiarInputs()
   }
 
@@ -89,7 +98,6 @@ export class RegistroComponent {
       rol: this.usuarios.rol = '',
       password: this.usuarios.password = '',
     }
-    alert('te registraste correctamente')
   }
 }
 

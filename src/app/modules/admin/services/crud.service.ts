@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Productos } from 'src/app/models/productos';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs';
-import { Action } from 'rxjs/internal/scheduler/Action';
 
 
 @Injectable({
@@ -46,8 +45,27 @@ export class CrudService {
 
 
 
-
- 
   //EDITAR productos
+  modificarProducto(idProducto:string, nuevaData:Productos){
+    /* accedemos a la oclecion productos de la base de datos,
+      buscamos el id del productos seleccionado y lo actualizamos con el metodo update,
+      enviando la nueva informacion 
+    */
+    return this.database.collection('productos').doc(idProducto).update(nuevaData);
+  }
+
+
   //ELIMINAR productos
+  eliminarProducto(idProducto:string){
+    return new Promise((resolve, reject)=>{
+      try{
+        const respuesta = this.productosCollection.doc(idProducto).delete();
+
+        resolve (respuesta);
+      }
+      catch(error){
+        reject(error);
+      }
+    })
+  }
 }

@@ -1,5 +1,5 @@
 <!-- TABLA DE PRODUCTOS -->
-<!-- 
+
 <table class="table">
     <thead>
         <tr>
@@ -14,33 +14,34 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let productos of collecionProductos">
+        <tr *ngFor="let productos of collectionProductos">
             <th scope="row">1</th>
 
             <td>
-                <img src="{{producto.imagen}}" alt="{{producto.alt}}">
+                <img src="{{productos.imagen}}" alt="{{productos.alt}}">
             </td>
-            <td {{producto.nombre}}></td>
-            <td {{producto.precio}}></td>
-            <td {{producto.descripcion}}></td>
-            <td {{producto.categoria}}></td>
+            <td {{productos.nombre}}></td>
+            <td {{productos.precio}}></td>
+            <td {{productos.descripcion}}></td>
+            <td {{productos.categoria}}></td>
 
 
-        
+        <!-- acciones -->
             <td>
                 <button id="btn-edit" title="Editar" type="button" class="btn btn-outline-warning">
                     <mat-icon>edit</mat-icon>
                 </button>
             </td>
             <td>
-                <button id="btn-delete" title="Eliminar" type="button" class="btn btn-outline-danger">
+                <button id="btn-delete" title="Eliminar" type="button" class="btn btn-outline-danger"
+                data-bs-toggle="modal" data-bs-target="#eliminarProducto" (click)="mostrarBorrar(productos)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </td>
         </tr>
     </tbody>
 </table>
--->
+
 <!-- BOTON PARA AGREGAR NUEVOS PRODUCTOS -->
 <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#agregarProductos">
     Agregar un nuevo producto!
@@ -101,3 +102,23 @@
         </div>
     </div>
 </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="eliminarProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

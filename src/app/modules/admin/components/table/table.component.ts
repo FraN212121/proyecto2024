@@ -32,6 +32,7 @@ export class TableComponent {
     imagen: new FormControl('', Validators.required),
     alt: new FormControl('', Validators.required),
   })
+productoEdit: any;
 
 
   ngOnInit(): void { 

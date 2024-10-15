@@ -95,7 +95,7 @@ export class RegistroComponent {
       nombre: this.usuarios.nombre = '',
       apellido: this.usuarios.apellido = '',
       email: this.usuarios.email = '',
-      rol: this.usuarios.rol = '',
+      rol: this.usuarios.rol = 'vis', //  => todos los usuarios la registrarse seran visitantes 
       password: this.usuarios.password = '',
     }
   }

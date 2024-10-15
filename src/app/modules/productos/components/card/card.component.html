@@ -1,17 +1,34 @@
-<!-- card para mostrar TODOS los productos que el admin ingrese a la base de -->
-<div class="contenido" *ngFor="let productos of coleccionProductos">
-    <div class="card" style="width: 18rem;">
-        <img src="{{productos.imagen}}" class="card-img-top" alt="{{productos.alt}}">
+<div class="row">
+    <div class="col-lg-12" *ngIf="compraVisible">
+        <div class="col-lg-4">
+            <div class="card text-bg-info mb-3">
+                <ul class="list-group">
+                    <h3>Ultima compra:</h3>
+                    <li class="list-group-item">
+                        {{productoReciente}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-        <div class="card-body">
-            <h5 class="card-title">{{productos.imagen}}</h5>
-            <p class="card-text">{{productos.precio}}</p>
-            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#verMas"
-                (click)="mostrarVer(productos)">Ver mas</button>
+    <!-- card para mostrar TODOS los productos que el admin ingrese a la base de -->
+    <div class="contenido" *ngFor="let productos of coleccionProductos">
+        <div class="card" style="width: 18rem;">
+            <img src="{{productos.imagen}}" class="card-img-top" alt="{{productos.alt}}">
 
+            <div class="card-body">
+                <h5 class="card-title">{{productos.imagen}}</h5>
+                <p class="card-text">{{productos.precio}}</p>
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#verMas"
+                    (click)="mostrarVer(productos)">Ver mas</button>
+
+            </div>
         </div>
     </div>
 </div>
+
+
 
 <!-- Modal para ver mas informacion -->
 <div class="modal fade" *ngIf="modalVisible" id="verMas" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -35,7 +52,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Agregar al carrito!</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    (click)="agregarProducto(productoSeleccionado)">Agregar al carrito!</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
 
             </div>

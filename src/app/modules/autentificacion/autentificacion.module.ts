@@ -26,7 +26,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     AutentificacionRoutingModule,
-    MatIconModule,
+    MatIconModule,  
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,

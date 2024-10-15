@@ -15,8 +15,6 @@
 }
 }
 
-
-
 /* ENCAPSULA ESTILOS PRA PANTALLAS MAS GRANDES -- EJ: computadora, televisor*/
 @media (min-width:700px) {
   mat-toolbar {

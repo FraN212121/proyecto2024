@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { Productos } from 'src/app/models/productos';
 import { CrudService } from 'src/app/modules/admin/services/crud.service';
 
@@ -15,8 +15,16 @@ coleccionProductos: Productos[] = [];
 // variable local para seleccionar un producto en especifico 
 productoSeleccionado!: Productos;
 
-
+// variable local para manejar el estado del modal
 modalVisible: boolean = false;
+
+// booleano  para manejar la visibilidad de "ultima compra"
+compraVisible: boolean=false;
+
+// directivas para comunicarse con el componente padre
+@Input()productoReciente:string='';
+@Output()productoAgregado= new EventEmitter<Productos>();
+
 
 constructor(public servicioCrud: CrudService){}
 
@@ -33,5 +41,11 @@ mostrarVer(info: Productos){
 
   // guardo en variable seleccionado la informacion de producto elegido 
   this.productoSeleccionado=info;
+}
+
+agregarProducto(info:Productos){
+  this.productoAgregado.emit(info);
+
+  this.compraVisible=true;
 }
 }

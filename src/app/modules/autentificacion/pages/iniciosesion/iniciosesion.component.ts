@@ -66,6 +66,21 @@ export class IniciosesionComponent {
           text: "Se pudo registrar con exito :)",
           icon: "success"
         });
+        this.servicioAuth.setUsuarioRol(usuarioData.rol);
+
+        if (usuarioData.rol === "admin") {
+          console.log("Inicio como administrador")
+
+          // si es administrador, redireccionamos a la vista de "admin"
+          this.servicioRutas.navigate(['/admin']);
+        }else{
+          console.log("Inicio como visitante")
+
+          // si es otro tipo de usuario, redireccionamos al "inicio"
+          this.servicioRutas.navigate(["/Inicio"])
+        }
+
+
         this.servicioRutas.navigate(['/Inicio'])
       })
       .catch(err => {
